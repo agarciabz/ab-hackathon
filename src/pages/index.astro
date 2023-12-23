@@ -1,30 +1,29 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import { fetchImages, isErrorResponse } from "../api/client";
-import ImageCard from "../components/ImageCard.astro";
+import Layout from '../layouts/Layout.astro'
+import Card from '../components/Card.astro'
+import { fetchImages, isErrorResponse } from '../api/client'
+import ImageCard from '../components/ImageCard.astro'
+import { updateStore } from '../store/imageStore'
 
-const response = await fetchImages();
-console.log(response);
+const response = await fetchImages()
+if (!isErrorResponse(response)) updateStore(response.photos)
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title='Welcome to Astro.'>
   <main>
     <h1>Image collection</h1>
-    <ul transition:name="pepe" role="list" class="link-card-grid">
+    <ul transition:name='juan' role='list'>
       {
         isErrorResponse(response) ? (
           <div>Error</div>
         ) : (
           response.photos.map((photo) => (
             <li>
-              <ImageCard url={photo.src.small} />
+              <ImageCard id={photo.id.toString()} url={photo.src.small} />
             </li>
           ))
         )
       }
     </ul>
   </main>
-
-  <style></style>
 </Layout>

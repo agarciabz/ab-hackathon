@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { findImage } from '../store/imageStore'
+const { id } = Astro.params
+const image = findImage(+(id ?? 0))
+---
+
+<Layout title='red'>
+  <main class='bg-black'>
+    <a href='/' class='p-4 rounded text-black w-20 h-10 absolute top-0 left-0'
+      >{'<- Home'}</a
+    >
+    <img
+      transition:name='juan'
+      class='absolute right-0'
+      src={image?.src.portrait}
+    />
+    <!-- <div transition:name={id} class='flex w-full justify-evenly'>
+      <div class='text-2xl text-white'>{image?.photographer}</div>
+      <div>
+        <img src={image?.src.portrait} />
+      </div>
+    </div> -->
+  </main>
+</Layout>

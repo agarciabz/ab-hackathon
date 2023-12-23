@@ -1,11 +1,12 @@
 ---
 interface Props {
-  url: string;
+  url: string
+  id: string
 }
 
-const { url } = Astro.props;
+const { url, id } = Astro.props
 ---
 
-<div class="p-2 border bg-white rounded">
+<a href={id} class='flex p-2 border bg-white rounded'>
   <img src={url} />
-</div>
+</a>
